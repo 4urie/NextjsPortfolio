@@ -6,7 +6,6 @@ import { Awards } from "@/features/profile/components/awards";
 import { Certifications } from "@/features/profile/components/certifications";
 import { Experiences } from "@/features/profile/components/experiences";
 import { GitHubContributions } from "@/features/profile/components/github-contributions";
-import { Hobbies } from "@/features/profile/components/hobbies";
 import { Overview } from "@/features/profile/components/overview";
 import { ProfileCover } from "@/features/profile/components/profile-cover";
 import { ProfileHeader } from "@/features/profile/components/profile-header";
@@ -47,9 +46,6 @@ export default function Page() {
         <Separator />
 
         <TestimonialsMarquee />
-        <Separator />
-
-        <Hobbies />
         <Separator />
 
         <TeckStack />

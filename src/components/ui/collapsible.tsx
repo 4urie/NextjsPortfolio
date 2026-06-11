@@ -32,13 +32,20 @@ const useCollapsible = () => {
 
 function CollapsibleWithContext({
   defaultOpen,
+  open: controlledOpen,
+  onOpenChange: controlledOnOpenChange,
   ...props
 }: React.ComponentProps<typeof Collapsible>) {
-  const [open, setOpen] = useState(defaultOpen ?? false);
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(
+    defaultOpen ?? false
+  );
+
+  const open = controlledOpen ?? uncontrolledOpen;
+  const onOpenChange = controlledOnOpenChange ?? setUncontrolledOpen;
 
   return (
     <CollapsibleContext.Provider value={{ open }}>
-      <Collapsible open={open} onOpenChange={setOpen} {...props} />
+      <Collapsible open={open} onOpenChange={onOpenChange} {...props} />
     </CollapsibleContext.Provider>
   );
 }
