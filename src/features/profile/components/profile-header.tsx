@@ -64,17 +64,16 @@ export function ProfileHeader() {
           </svg>
         </SimpleTooltip>
       </div>
-//commit
       <div className="flex flex-1 flex-col">
         <div
           className={cn(
             "flex grow items-end pb-1 pl-4",
             "bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px] [--pattern-foreground:var(--color-edge)]/56"
-           )}
+          )}
         >
           <div className="line-clamp-1 select-none font-mono text-xs text-zinc-300 max-sm:hidden dark:text-zinc-800">
-  Imissu
-</div>
+            Imissu
+          </div>
         </div>
 
         <div className="border-t border-edge">
