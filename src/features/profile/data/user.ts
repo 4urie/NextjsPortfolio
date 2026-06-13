@@ -6,7 +6,7 @@ export const USER: User = {
   displayName: "4urie",
   username: "aurienellas",
   gender: "female",
-  pronouns: "she/her",
+  pronouns: "he/him",
   bio: "BSIT student building practical software for web, mobile, and IoT.",
   timeZone: "Asia/Manila",
   flipSentences: [
