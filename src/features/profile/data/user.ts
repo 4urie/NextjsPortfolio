@@ -41,8 +41,8 @@ export const USER: User = {
 * Learning to move forward, embrace change, and stay committed to growth one step at a time.
   `,
 
-  avatar: "/images/me.png",
-  ogImage: "/images/me.png",
+  avatar: "/images/me1.jpg",
+  ogImage: "/images/me1.jpg",
   namePronunciationUrl: "",
   keywords: [
     "aurie nellas",
