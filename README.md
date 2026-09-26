@@ -1,4 +1,5 @@
 # [Aurie Nellas](https://4urie.me)
+**BSIT-4D** | **IT415**
 
 A minimal, pixel-perfect dev portfolio, blog and products to showcase my work as a Fullstack developer.
 
