@@ -9,13 +9,13 @@ import {
 } from "@/features/products/shopflow/components";
 
 export const metadata: Metadata = {
-  title: "AquaServe - Mobile Water Ordering App",
+  title: "ShopFlow",
   description:
-    "A mobile water ordering application with AI chatbot ordering, delivery tracking, scheduling, and admin management.",
+    "A shop management system with point-of-sale and inventory features.",
   openGraph: {
-    title: "AquaServe - Mobile Water Ordering App",
+    title: "ShopFlow",
     description:
-      "A mobile water ordering application with AI chatbot ordering, delivery tracking, scheduling, and admin management.",
+      "A shop management system with point-of-sale and inventory features.",
     type: "website",
   },
 };

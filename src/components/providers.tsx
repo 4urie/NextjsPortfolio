@@ -8,6 +8,7 @@ import { ThemeProvider } from "next-themes";
 
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
+import { CommandMenu } from "./command-menu";
 import { Toaster } from "./ui/sonner";
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -15,7 +16,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <JotaiProvider>
       <ThemeProvider
         enableSystem
-        disableTransitionOnChange
         enableColorScheme
         storageKey="theme"
         defaultTheme="system"
@@ -31,6 +31,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         </AppProgressProvider>
         <Toaster position="top-center" />
         <SmoothCursor />
+        <CommandMenu />
         <Analytics />
         <SpeedInsights />
       </ThemeProvider>

@@ -22,7 +22,10 @@ function PanelHeader({ className, ...props }: React.ComponentProps<"header">) {
   return (
     <header
       data-slot="panel-header"
-      className={cn("screen-line-after px-4", className)}
+      className={cn(
+        "screen-line-after flex items-center justify-between gap-3 px-5 py-3",
+        className
+      )}
       {...props}
     />
   );
@@ -38,7 +41,10 @@ function PanelTitle({
   return (
     <Comp
       data-slot="panel-title"
-      className={cn("text-3xl font-semibold", className)}
+      className={cn(
+        "font-pixel text-[13px] leading-none text-faint lowercase",
+        className
+      )}
       {...props}
     />
   );
@@ -46,7 +52,7 @@ function PanelTitle({
 
 function PanelContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div data-slot="panel-body" className={cn("p-4", className)} {...props} />
+    <div data-slot="panel-body" className={cn("p-5", className)} {...props} />
   );
 }
 

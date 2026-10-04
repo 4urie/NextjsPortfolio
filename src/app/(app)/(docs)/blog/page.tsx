@@ -14,22 +14,20 @@ export default function Page() {
   return (
     <>
       <div className="screen-line-after px-4">
-        <h1 className="text-3xl font-semibold">Blog</h1>
+        <h1 className="font-pixel text-5xl lowercase">blog</h1>
       </div>
 
       <div className="screen-line-after p-4">
-        <p className="font-mono text-sm text-balance text-muted-foreground">
-          {metadata.description}
-        </p>
+        <p className="micro-label text-balance">{metadata.description}</p>
       </div>
 
       <div className="relative pt-4">
-        <div className="absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2">
+        <div className="absolute inset-0 -z-1 grid grid-cols-1 gap-3 max-sm:hidden sm:grid-cols-2">
           <div className="border-r border-edge"></div>
           <div className="border-l border-edge"></div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {allPosts.map((post, index) => (
             <PostItem
               key={post.slug}

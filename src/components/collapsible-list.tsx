@@ -54,8 +54,8 @@ export function CollapsibleList<T>({
         <div className="flex h-12 items-center justify-center pb-px">
           <CollapsibleTrigger asChild>
             <Button
-              className="group/collapsible-trigger flex"
-              variant="default"
+              className="group/collapsible-trigger flex font-mono text-[11px] tracking-[0.08em] text-faint uppercase hover:text-foreground"
+              variant="ghost"
             >
               <span className="hidden group-data-[state=closed]/collapsible-trigger:block">
                 Show More
@@ -66,7 +66,7 @@ export function CollapsibleList<T>({
               </span>
 
               <ChevronDownIcon
-                className="group-data-[state=open]/collapsible-trigger:rotate-180"
+                className="transition-transform duration-200 group-data-[state=open]/collapsible-trigger:rotate-180"
                 aria-hidden
               />
             </Button>

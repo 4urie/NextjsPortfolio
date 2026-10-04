@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/button";
 export function ShopFlowCTA() {
   return (
     <section className="py-20 md:py-32">
-      <div className="mx-auto max-w-4xl">
-        <div className="relative overflow-hidden rounded-2xl border bg-linear-to-br from-primary/10 via-primary/5 to-background p-12 md:p-16">
-          <div className="relative z-10 text-center">
-            <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+      <div className="mx-auto max-w-3xl">
+        <div className="rounded-2xl border border-edge bg-muted/50 p-12 md:p-16">
+          <div className="text-center">
+            <h2 className="text-[1.3rem] font-semibold tracking-[-0.02em]">
               Ready to Streamline Your Shop Operations?
             </h2>
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground">
+            <p className="mx-auto mt-3 mb-8 max-w-2xl text-sm text-muted-foreground">
               AquaServe is a capstone project built to demonstrate full-stack
               capabilities across web, mobile, and backend systems. Contact me
               to discuss custom water ordering and delivery solutions.
@@ -38,27 +38,24 @@ export function ShopFlowCTA() {
               </Button>
             </div>
 
-            <div className="mt-12 grid gap-6 text-sm md:grid-cols-3">
-              <div className="rounded-lg border bg-background/50 p-6 backdrop-blur-sm">
-                <div className="mb-2 text-2xl font-bold text-primary">1</div>
-                <div className="font-medium">Capstone Project</div>
-                <div className="text-muted-foreground">AquaServe</div>
+            <div className="mt-12 grid gap-3 text-sm md:grid-cols-3">
+              <div className="rounded-xl border border-edge bg-background/60 p-6 backdrop-blur-sm">
+                <div className="mb-2 font-pixel text-xl">1</div>
+                <div className="text-sm font-medium">Capstone Project</div>
+                <div className="mt-1 micro-label">AquaServe</div>
               </div>
-              <div className="rounded-lg border bg-background/50 p-6 backdrop-blur-sm">
-                <div className="mb-2 text-2xl font-bold text-primary">3</div>
-                <div className="font-medium">Core Areas</div>
-                <div className="text-muted-foreground">Web, Mobile, IoT</div>
+              <div className="rounded-xl border border-edge bg-background/60 p-6 backdrop-blur-sm">
+                <div className="mb-2 font-pixel text-xl">3</div>
+                <div className="text-sm font-medium">Core Areas</div>
+                <div className="mt-1 micro-label">Web, Mobile, IoT</div>
               </div>
-              <div className="rounded-lg border bg-background/50 p-6 backdrop-blur-sm">
-                <div className="mb-2 text-2xl font-bold text-primary">AI</div>
-                <div className="font-medium">Ordering Assistant</div>
-                <div className="text-muted-foreground">Smart chatbot flow</div>
+              <div className="rounded-xl border border-edge bg-background/60 p-6 backdrop-blur-sm">
+                <div className="mb-2 font-pixel text-xl">AI</div>
+                <div className="text-sm font-medium">Ordering Assistant</div>
+                <div className="mt-1 micro-label">Smart chatbot flow</div>
               </div>
             </div>
           </div>
-
-          <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" />
         </div>
       </div>
     </section>

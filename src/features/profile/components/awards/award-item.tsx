@@ -29,7 +29,7 @@ export function AwardItem({
       <div className={className}>
         <div className="flex items-center hover:bg-accent2">
           <div
-            className="mx-4 flex size-6 shrink-0 items-center justify-center rounded-lg border border-muted-foreground/15 bg-muted ring-1 ring-edge ring-offset-1 ring-offset-background"
+            className="mx-4 flex size-6 shrink-0 items-center justify-center rounded-md border border-edge bg-muted text-muted-foreground"
             aria-hidden
           >
             <Icons.award className="pointer-events-none size-4 text-muted-foreground" />
@@ -38,11 +38,11 @@ export function AwardItem({
           <div className="flex-1 border-l border-dashed border-edge">
             <CollapsibleTrigger className="flex w-full items-center gap-4 p-4 pr-2 text-left select-none">
               <div className="flex-1">
-                <h3 className="mb-1 leading-snug font-medium text-balance">
+                <h3 className="mb-1 text-[15px] leading-snug font-medium text-balance">
                   {award.title}
                 </h3>
 
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 micro-label">
                   <dl>
                     <dt className="sr-only">Prize</dt>
                     <dd>{award.prize}</dd>

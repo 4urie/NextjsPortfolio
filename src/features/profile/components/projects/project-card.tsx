@@ -30,13 +30,12 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <motion.article
       layout
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 260, damping: 24 }}
-      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-edge bg-background/90 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.45)] backdrop-blur-sm"
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-edge bg-background/90 shadow-card backdrop-blur-sm transition-shadow duration-350 hover:shadow-card-hover"
     >
       {/* Thumbnail */}
       <div className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         {project.logo ? (
           <Image
             src={project.logo}
@@ -44,7 +43,7 @@ export function ProjectCard({ project }: { project: Project }) {
             width={1200}
             height={675}
             unoptimized
-            className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
           />
         ) : (
           <div className="flex aspect-video w-full items-center justify-center bg-muted/30 text-muted-foreground">
@@ -54,13 +53,13 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col gap-3 p-4">
+      <div className="flex flex-1 flex-col gap-3 p-5">
         {/* Title row */}
         <div>
-          <h3 className="text-lg font-semibold tracking-tight">
+          <h3 className="text-[15px] font-medium tracking-tight">
             {project.title}
           </h3>
-          <p className="text-xs text-muted-foreground">
+          <p className="mt-1 micro-label">
             {project.period.start}
             {project.period.end ? ` — ${project.period.end}` : " — Present"}
           </p>
@@ -78,16 +77,12 @@ export function ProjectCard({ project }: { project: Project }) {
           <ul className="flex flex-wrap gap-1.5">
             {visibleSkills.map((skill) => (
               <li key={skill}>
-                <Tag className="border-edge bg-background/60 px-2 py-0.5 text-[11px] text-foreground/70">
-                  {skill}
-                </Tag>
+                <Tag>{skill}</Tag>
               </li>
             ))}
             {remainingCount > 0 && (
               <li>
-                <Tag className="border-edge bg-background/60 px-2 py-0.5 text-[11px] text-muted-foreground">
-                  +{remainingCount}
-                </Tag>
+                <Tag>+{remainingCount}</Tag>
               </li>
             )}
           </ul>
@@ -95,11 +90,13 @@ export function ProjectCard({ project }: { project: Project }) {
 
         {/* Footer */}
         <div className="mt-auto flex items-center justify-between border-t border-edge/50 pt-3">
-          <span
-            className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium ${getStatusStyles(status)}`}
+          <Tag
+            featured={status === "In Progress"}
+            className={getStatusStyles(status)}
           >
+            {status === "In Progress" && <span className="status-dot size-1" />}
             {status}
-          </span>
+          </Tag>
 
           <div className="flex items-center gap-0.5">
             <a
@@ -107,7 +104,7 @@ export function ProjectCard({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub repository"
-              className="inline-flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              className="inline-flex size-8 items-center justify-center rounded-full text-faint transition-colors hover:bg-accent hover:text-foreground"
             >
               <GithubIcon className="size-4" />
             </a>
@@ -116,7 +113,7 @@ export function ProjectCard({ project }: { project: Project }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Live demo"
-              className="inline-flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              className="inline-flex size-8 items-center justify-center rounded-full text-faint transition-colors hover:bg-accent hover:text-foreground"
             >
               <ExternalLinkIcon className="size-4" />
             </a>
@@ -125,7 +122,7 @@ export function ProjectCard({ project }: { project: Project }) {
                 <button
                   type="button"
                   aria-label="View details"
-                  className="inline-flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  className="inline-flex size-8 items-center justify-center rounded-full text-faint transition-colors hover:bg-accent hover:text-foreground"
                 >
                   <InfoIcon className="size-4" />
                 </button>

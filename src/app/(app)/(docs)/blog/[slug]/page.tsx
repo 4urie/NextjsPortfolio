@@ -9,7 +9,7 @@ import type { BlogPosting as PageSchema, WithContext } from "schema-dts";
 import { InlineTOC } from "@/components/inline-toc";
 import { MDX } from "@/components/mdx";
 import { Button } from "@/components/ui/button";
-import { Prose } from "@/components/ui/typography";
+import { Article } from "@/components/ui/typography";
 import { SITE_INFO } from "@/config/site";
 import { PostKeyboardShortcuts } from "@/features/blog/components/post-keyboard-shortcuts";
 import { LLMCopyButtonWithViewOptions } from "@/features/blog/components/post-page-actions";
@@ -21,7 +21,6 @@ import {
 } from "@/features/blog/data/posts";
 import type { Post } from "@/features/blog/types/post";
 import { USER } from "@/features/profile/data/user";
-import { cn } from "@/lib/utils";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -125,7 +124,7 @@ export default async function Page({
 
       <div className="flex items-center justify-between p-2 pl-4">
         <Button
-          className="h-7 gap-2 rounded-lg px-0 font-mono text-muted-foreground"
+          className="h-7 gap-2 rounded-md px-0 font-mono text-[11px] tracking-[0.08em] text-faint uppercase"
           variant="link"
           asChild
         >
@@ -163,18 +162,10 @@ export default async function Page({
         </div>
       </div>
 
-      <div className="screen-line-before screen-line-after">
-        <div
-          className={cn(
-            "h-8",
-            "before:absolute before:-left-[100vw] before:-z-1 before:h-full before:w-[200vw]",
-            "before:bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] before:bg-size-[10px_10px] before:[--pattern-foreground:var(--color-edge)]/56"
-          )}
-        />
-      </div>
+      <div className="screen-line-before screen-line-after h-4" />
 
-      <Prose className="px-4">
-        <h1 className="screen-line-after mb-6 font-semibold">
+      <Article className="mx-auto w-full max-w-2xl px-4">
+        <h1 className="screen-line-after mb-6 text-[1.6rem] font-semibold tracking-[-0.02em]">
           {post.metadata.title}
         </h1>
 
@@ -185,7 +176,7 @@ export default async function Page({
         <div>
           <MDX code={post.content} />
         </div>
-      </Prose>
+      </Article>
 
       <div className="screen-line-before h-4 w-full" />
     </>

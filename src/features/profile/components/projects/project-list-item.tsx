@@ -10,6 +10,7 @@ import { Markdown } from "@/components/markdown";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/tag";
 import { UTM_PARAMS } from "@/config/site";
+import { cn } from "@/lib/utils";
 import { addQueryParams } from "@/utils/url";
 
 import type { Project } from "../../types/projects";
@@ -26,7 +27,7 @@ export function ProjectListItem({ project }: { project: Project }) {
     >
       <div className="grid gap-4 md:grid-cols-[auto,1fr,auto] md:items-start">
         <div className="flex items-center gap-3">
-          <div className="flex size-14 items-center justify-center overflow-hidden rounded-2xl border border-edge bg-muted/30">
+          <div className="flex size-14 items-center justify-center overflow-hidden rounded-xl border border-edge bg-muted/30">
             {project.logo ? (
               <Image
                 src={project.logo}
@@ -40,19 +41,21 @@ export function ProjectListItem({ project }: { project: Project }) {
               <Icons.project className="size-6 text-muted-foreground" />
             )}
           </div>
-          <span
-            className={`inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium ${getStatusStyles(status)}`}
+          <Tag
+            featured={status === "In Progress"}
+            className={getStatusStyles(status)}
           >
+            {status === "In Progress" && <span className="status-dot size-1" />}
             {status}
-          </span>
+          </Tag>
         </div>
 
         <div className="space-y-3">
           <div>
-            <h3 className="text-lg font-semibold tracking-tight">
+            <h3 className="text-[15px] font-medium tracking-tight">
               {project.title}
             </h3>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-1 micro-label">
               {project.period.start}
               {project.period.end ? ` - ${project.period.end}` : " - Present"}
             </p>
@@ -65,12 +68,10 @@ export function ProjectListItem({ project }: { project: Project }) {
           )}
 
           {project.skills.length > 0 && (
-            <ul className="flex flex-wrap gap-2">
+            <ul className="flex flex-wrap gap-1.5">
               {project.skills.map((skill) => (
                 <li key={skill}>
-                  <Tag className="border-edge bg-background/70 px-2 py-1 text-xs text-foreground/80">
-                    {skill}
-                  </Tag>
+                  <Tag>{skill}</Tag>
                 </li>
               ))}
             </ul>
@@ -82,10 +83,10 @@ export function ProjectListItem({ project }: { project: Project }) {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
+                transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="overflow-hidden"
               >
-                <div className="mt-3 rounded-2xl border border-edge bg-background/60 p-4">
+                <div className="mt-3 rounded-xl border border-edge bg-background/60 p-4">
                   <Markdown>
                     {project.description ?? "No additional details available."}
                   </Markdown>
@@ -95,12 +96,12 @@ export function ProjectListItem({ project }: { project: Project }) {
           </AnimatePresence>
         </div>
 
-        <div className="flex flex-wrap gap-2 md:justify-end">
+        <div className="flex flex-wrap items-center gap-2 md:justify-end">
           <a
             href={addQueryParams(project.link, UTM_PARAMS)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-edge px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground"
+            className="inline-flex items-center gap-1.5 rounded-full border border-edge px-3 py-1.5 font-mono text-[11px] tracking-[0.08em] text-faint uppercase transition-colors hover:text-foreground"
           >
             <GithubIcon className="size-4" />
             GitHub
@@ -109,7 +110,7 @@ export function ProjectListItem({ project }: { project: Project }) {
             href={addQueryParams(project.link, UTM_PARAMS)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-edge px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground"
+            className="inline-flex items-center gap-1.5 rounded-full border border-edge px-3 py-1.5 font-mono text-[11px] tracking-[0.08em] text-faint uppercase transition-colors hover:text-foreground"
           >
             <ExternalLinkIcon className="size-4" />
             Live Demo
@@ -118,12 +119,15 @@ export function ProjectListItem({ project }: { project: Project }) {
             type="button"
             variant="ghost"
             size="sm"
-            className="rounded-full"
+            className="rounded-full font-mono text-[11px] tracking-[0.08em] text-faint uppercase hover:text-foreground"
             onClick={() => setOpen((value) => !value)}
           >
             <span>{open ? "Collapse" : "Expand"}</span>
             <ChevronDownIcon
-              className={`size-4 transition-transform ${open ? "rotate-180" : ""}`}
+              className={cn(
+                "size-4 transition-transform duration-200",
+                open && "rotate-180"
+              )}
             />
           </Button>
         </div>

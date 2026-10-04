@@ -38,7 +38,9 @@ export function NotFound({ className }: { className?: string }) {
         ></path>
       </svg>
 
-      <h1 className="mt-8 mb-6 font-mono text-8xl font-medium">404</h1>
+      <h1 className="mt-8 mb-6 font-pixel text-6xl lowercase">404</h1>
+
+      <p className="mb-6 micro-label">page not found</p>
 
       <Button variant="default" asChild>
         <Link href="/">

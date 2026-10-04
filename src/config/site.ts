@@ -1,5 +1,4 @@
 import { USER } from "@/features/profile/data/user";
-import type { NavItem } from "@/types/nav";
 
 export const SITE_INFO = {
   name: USER.displayName,
@@ -11,27 +10,8 @@ export const SITE_INFO = {
 
 export const META_THEME_COLORS = {
   light: "#ffffff",
-  dark: "#09090b",
+  dark: "#0c0c0f",
 };
-
-export const MAIN_NAV: NavItem[] = [
-  {
-    title: "Portfolio",
-    href: "/",
-  },
-  // {
-  //   title: "Blog",
-  //   href: "/blog",
-  // },
-  // {
-  //   title: "Projects",
-  //   href: "/products",
-  // },
-  // {
-  //   title: "Components",
-  //   href: "/components",
-  // },
-];
 
 export const GITHUB_USERNAME = "4urie";
 export const SOURCE_CODE_GITHUB_REPO = "4urie/My-Portfolio";

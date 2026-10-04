@@ -19,14 +19,42 @@ function Prose({
     <Comp
       data-slot="prose"
       className={cn(
-        "prose prose-sm max-w-none font-mono text-foreground prose-zinc dark:prose-invert",
+        "prose prose-sm max-w-none font-sans text-foreground prose-gray dark:prose-invert",
         "prose-headings:font-sans prose-headings:font-semibold prose-headings:text-balance",
         "prose-h2:border-b prose-h2:border-edge prose-h2:pb-2 prose-h2:text-2xl",
         "prose-lead:text-base",
-        "prose-a:font-medium prose-a:wrap-break-word prose-a:text-foreground prose-a:no-underline prose-a:underline-offset-4 hover:prose-a:underline",
+        "prose-a:font-medium prose-a:wrap-break-word prose-a:text-foreground prose-a:underline prose-a:decoration-foreground/25 prose-a:underline-offset-[2px] hover:prose-a:decoration-foreground",
         "prose-code:rounded-md prose-code:border prose-code:bg-muted/50 prose-code:px-[0.3rem] prose-code:py-[0.2rem] prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none",
         "prose-hr:border-edge",
-        "prose-blockquote:border-s-border prose-blockquote:[&_p:first-of-type]:before:content-none prose-blockquote:[&_p:last-of-type]:after:content-none",
+        "prose-blockquote:border-s-edge prose-blockquote:[&_p:first-of-type]:before:content-none prose-blockquote:[&_p:last-of-type]:after:content-none",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+// Long-form article body (blog posts): serif at 17px with a roomy 1.75 line-height.
+function Article({
+  className,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"div"> & {
+  asChild?: boolean;
+}) {
+  const Comp = asChild ? Slot : "div";
+
+  return (
+    <Comp
+      data-slot="article"
+      className={cn(
+        "prose max-w-none font-serif text-[17px] leading-[1.75] text-foreground prose-gray dark:prose-invert",
+        "prose-headings:font-sans prose-headings:font-semibold prose-headings:tracking-[-0.02em] prose-headings:text-balance",
+        "prose-h1:text-[1.6rem] prose-h2:text-[1.3rem] prose-h3:text-[1.1rem]",
+        "prose-a:font-medium prose-a:wrap-break-word prose-a:text-foreground prose-a:underline prose-a:decoration-foreground/25 prose-a:underline-offset-[2px] hover:prose-a:decoration-foreground",
+        "prose-code:rounded-md prose-code:border prose-code:bg-muted/50 prose-code:px-[0.3rem] prose-code:py-[0.2rem] prose-code:font-mono prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none",
+        "prose-hr:border-edge",
+        "prose-blockquote:border-s-edge prose-blockquote:[&_p:first-of-type]:before:content-none prose-blockquote:[&_p:last-of-type]:after:content-none",
         className
       )}
       {...props}
@@ -83,4 +111,4 @@ function Heading<T extends HeadingTypes = "h1">({
   );
 }
 
-export { Code, Heading, Prose };
+export { Article, Code, Heading, Prose };

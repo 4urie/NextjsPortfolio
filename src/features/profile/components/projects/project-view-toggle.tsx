@@ -18,7 +18,7 @@ export function ProjectViewToggle({
     <div
       role="tablist"
       aria-label="Project view"
-      className="inline-flex rounded-full border border-edge bg-background/80 p-1 shadow-sm backdrop-blur"
+      className="inline-flex rounded-full border border-edge bg-background/80 p-1 backdrop-blur"
     >
       <Button
         type="button"
@@ -27,13 +27,14 @@ export function ProjectViewToggle({
         variant="ghost"
         size="sm"
         className={cn(
-          "h-8 rounded-full px-3 text-xs transition-all",
-          value === "grid" && "bg-accent text-accent-foreground"
+          "h-8 rounded-full px-3 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors",
+          value === "grid" &&
+            "bg-foreground text-background hover:bg-foreground"
         )}
         onClick={() => onChange("grid")}
       >
         <LayoutGridIcon className="size-4" />
-        Grid View
+        Grid
       </Button>
       <Button
         type="button"
@@ -42,13 +43,14 @@ export function ProjectViewToggle({
         variant="ghost"
         size="sm"
         className={cn(
-          "h-8 rounded-full px-3 text-xs transition-all",
-          value === "list" && "bg-accent text-accent-foreground"
+          "h-8 rounded-full px-3 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors",
+          value === "list" &&
+            "bg-foreground text-background hover:bg-foreground"
         )}
         onClick={() => onChange("list")}
       >
         <Rows3Icon className="size-4" />
-        List View
+        List
       </Button>
     </div>
   );

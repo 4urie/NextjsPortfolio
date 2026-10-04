@@ -1,20 +1,21 @@
 "use client";
 
 import { useCommandState } from "cmdk";
+import { atom, useAtom, useSetAtom } from "jotai";
 import type { LucideProps } from "lucide-react";
 import {
   BriefcaseBusinessIcon,
   CircleUserIcon,
   CornerDownLeftIcon,
   LetterTextIcon,
-  MessageCircleMoreIcon,
   MoonStarIcon,
+  Music2Icon,
   SunIcon,
 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 
 import {
   CommandDialog,
@@ -29,10 +30,11 @@ import { SOCIAL_LINKS } from "@/features/profile/data/social-links";
 import { useSound } from "@/hooks/use-sound";
 import { cn } from "@/lib/utils";
 
-import { AbdulRehmanMark } from "./abdulrehman-mark";
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
+
+export const commandMenuOpenAtom = atom(false);
 
 type CommandLinkItem = {
   title: string;
@@ -48,12 +50,17 @@ const MENU_LINKS: CommandLinkItem[] = [
   {
     title: "Portfolio",
     href: "/",
-    icon: AbdulRehmanMark,
+    icon: LetterTextIcon,
   },
   {
     title: "Products",
     href: "/products",
     icon: Icons.react,
+  },
+  {
+    title: "Blog",
+    href: "/blog",
+    icon: Icons.project,
   },
 ];
 
@@ -71,6 +78,11 @@ const PORTFOLIO_LINKS: CommandLinkItem[] = [
     title: "About",
     href: "/#about",
     icon: LetterTextIcon,
+  },
+  {
+    title: "Music",
+    href: "/#music",
+    icon: Music2Icon,
   },
   {
     title: "Tech Stack",
@@ -98,11 +110,6 @@ const PORTFOLIO_LINKS: CommandLinkItem[] = [
     icon: Icons.certificate,
   },
   {
-    title: "Testimonials",
-    href: "/#testimonials",
-    icon: MessageCircleMoreIcon,
-  },
-  {
     title: "Download vCard",
     href: "/vcard",
     icon: CircleUserIcon,
@@ -116,12 +123,51 @@ const SOCIAL_LINK_ITEMS: CommandLinkItem[] = SOCIAL_LINKS.map((item) => ({
   openInNewTab: true,
 }));
 
+export function CommandMenuTrigger({ className }: { className?: string }) {
+  const setOpen = useSetAtom(commandMenuOpenAtom);
+
+  return (
+    <Button
+      variant="ghost"
+      className={cn(
+        "h-8 gap-1.5 rounded-full border border-edge px-3 font-mono text-[11px] tracking-[0.08em] text-faint uppercase select-none hover:text-foreground",
+        className
+      )}
+      onClick={() => setOpen(true)}
+    >
+      <svg
+        className="size-3.5"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 16 16"
+        aria-hidden
+      >
+        <path
+          d="M10.278 11.514a5.824 5.824 0 1 1 1.235-1.235l3.209 3.208A.875.875 0 0 1 14.111 15a.875.875 0 0 1-.624-.278l-3.209-3.208Zm.623-4.69a4.077 4.077 0 1 1-8.154 0 4.077 4.077 0 0 1 8.154 0Z"
+          fill="currentColor"
+          fillRule="evenodd"
+          clipRule="evenodd"
+        />
+      </svg>
+
+      <span className="hidden sm:inline">search</span>
+
+      <CommandMenuKbd className="hidden tracking-wider sm:in-[.os-macos_&]:flex">
+        ⌘K
+      </CommandMenuKbd>
+      <CommandMenuKbd className="hidden sm:not-[.os-macos_&]:flex">
+        Ctrl K
+      </CommandMenuKbd>
+    </Button>
+  );
+}
+
 export function CommandMenu() {
   const router = useRouter();
 
   const { setTheme } = useTheme();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useAtom(commandMenuOpenAtom);
 
   const playClick = useSound("/audio/ui-sounds/click.wav");
 
@@ -150,7 +196,7 @@ export function CommandMenu() {
     );
 
     return () => abortController.abort();
-  }, []);
+  }, [setOpen]);
 
   const handleOpenLink = useCallback(
     (href: string, openInNewTab = false) => {
@@ -162,7 +208,7 @@ export function CommandMenu() {
         router.push(href);
       }
     },
-    [router]
+    [router, setOpen]
   );
 
   const createThemeHandler = useCallback(
@@ -170,117 +216,77 @@ export function CommandMenu() {
       setOpen(false);
       playClick();
       setTheme(theme);
-
-      // if (!document.startViewTransition) {
-      //   setTheme(theme);
-      //   return;
-      // }
-
-      // document.startViewTransition(() => setTheme(theme));
     },
-    [playClick, setTheme]
+    [playClick, setTheme, setOpen]
   );
 
   return (
-    <>
-      <Button
-        variant="secondary"
-        className="h-8 gap-1.5 rounded-full border bg-zinc-50 px-3.5 text-muted-foreground select-none hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-900"
-        onClick={() => setOpen(true)}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 16 16"
-          aria-hidden
-        >
-          <path
-            d="M10.278 11.514a5.824 5.824 0 1 1 1.235-1.235l3.209 3.208A.875.875 0 0 1 14.111 15a.875.875 0 0 1-.624-.278l-3.209-3.208Zm.623-4.69a4.077 4.077 0 1 1-8.154 0 4.077 4.077 0 0 1 8.154 0Z"
-            fill="currentColor"
-            fillRule="evenodd"
-            clipRule="evenodd"
-          />
-        </svg>
+    <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandInput placeholder="Type a command or search..." />
 
-        <span className="font-sans text-sm/4 font-medium sm:hidden">
-          Search
-        </span>
+      <CommandList className="min-h-80 supports-timeline-scroll:scroll-fade-y">
+        <CommandEmpty>No results found.</CommandEmpty>
 
-        <CommandMenuKbd className="hidden tracking-wider sm:in-[.os-macos_&]:flex">
-          ⌘K
-        </CommandMenuKbd>
-        <CommandMenuKbd className="hidden sm:not-[.os-macos_&]:flex">
-          Ctrl K
-        </CommandMenuKbd>
-      </Button>
+        <CommandLinkGroup
+          heading="Menu"
+          links={MENU_LINKS}
+          onLinkSelect={handleOpenLink}
+        />
 
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandSeparator />
 
-        <CommandList className="min-h-80 supports-timeline-scroll:scroll-fade-y">
-          <CommandEmpty>No results found.</CommandEmpty>
+        <CommandLinkGroup
+          heading="Portfolio"
+          links={PORTFOLIO_LINKS}
+          onLinkSelect={handleOpenLink}
+        />
 
-          <CommandLinkGroup
-            heading="Menu"
-            links={MENU_LINKS}
-            onLinkSelect={handleOpenLink}
-          />
+        <CommandSeparator />
 
-          <CommandSeparator />
+        <CommandLinkGroup
+          heading="Products"
+          links={PRODUCT_LINKS}
+          fallbackIcon={Icons.react}
+          onLinkSelect={handleOpenLink}
+        />
 
-          <CommandLinkGroup
-            heading="Portfolio"
-            links={PORTFOLIO_LINKS}
-            onLinkSelect={handleOpenLink}
-          />
+        <CommandSeparator />
 
-          <CommandSeparator />
+        <CommandLinkGroup
+          heading="Social Links"
+          links={SOCIAL_LINK_ITEMS}
+          onLinkSelect={handleOpenLink}
+        />
 
-          <CommandLinkGroup
-            heading="Products"
-            links={PRODUCT_LINKS}
-            fallbackIcon={Icons.react}
-            onLinkSelect={handleOpenLink}
-          />
+        <CommandSeparator />
 
-          <CommandSeparator />
+        <CommandGroup heading="Theme">
+          <CommandItem
+            keywords={["theme"]}
+            onSelect={createThemeHandler("light")}
+          >
+            <SunIcon />
+            Light
+          </CommandItem>
+          <CommandItem
+            keywords={["theme"]}
+            onSelect={createThemeHandler("dark")}
+          >
+            <MoonStarIcon />
+            Dark
+          </CommandItem>
+          <CommandItem
+            keywords={["theme"]}
+            onSelect={createThemeHandler("system")}
+          >
+            <Icons.contrast />
+            Auto
+          </CommandItem>
+        </CommandGroup>
+      </CommandList>
 
-          <CommandLinkGroup
-            heading="Social Links"
-            links={SOCIAL_LINK_ITEMS}
-            onLinkSelect={handleOpenLink}
-          />
-
-          <CommandSeparator />
-
-          <CommandGroup heading="Theme">
-            <CommandItem
-              keywords={["theme"]}
-              onSelect={createThemeHandler("light")}
-            >
-              <SunIcon />
-              Light
-            </CommandItem>
-            <CommandItem
-              keywords={["theme"]}
-              onSelect={createThemeHandler("dark")}
-            >
-              <MoonStarIcon />
-              Dark
-            </CommandItem>
-            <CommandItem
-              keywords={["theme"]}
-              onSelect={createThemeHandler("system")}
-            >
-              <Icons.contrast />
-              Auto
-            </CommandItem>
-          </CommandGroup>
-        </CommandList>
-
-        <CommandMenuFooter />
-      </CommandDialog>
-    </>
+      <CommandMenuFooter />
+    </CommandDialog>
   );
 }
 
@@ -370,8 +376,13 @@ function CommandMenuFooter() {
     <>
       <div className="flex h-10" />
 
-      <div className="absolute inset-x-0 bottom-0 flex h-10 items-center justify-between gap-2 border-t bg-zinc-100/30 px-4 text-xs font-medium dark:bg-zinc-800/30">
-        <AbdulRehmanMark className="size-6 text-muted-foreground" aria-hidden />
+      <div className="absolute inset-x-0 bottom-0 flex h-10 items-center justify-between gap-2 border-t border-edge bg-muted/50 px-4 font-mono text-[11px] tracking-[0.08em] text-faint uppercase">
+        <span
+          className="font-pixel text-sm text-muted-foreground lowercase"
+          aria-hidden
+        >
+          4urie
+        </span>
 
         <div className="flex shrink-0 items-center gap-2">
           <span>{ENTER_ACTION_LABELS[selectedCommandKind]}</span>

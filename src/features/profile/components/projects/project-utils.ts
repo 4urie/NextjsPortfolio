@@ -13,11 +13,11 @@ export function getProjectStatus(project: {
 
 export function getStatusStyles(status: ProjectStatus) {
   switch (status) {
-    case "Completed":
-      return "border-emerald-500/20 bg-emerald-500/10 text-emerald-400";
     case "In Progress":
-      return "border-sky-500/20 bg-sky-500/10 text-sky-400";
+      return "border-transparent bg-foreground text-background";
+    case "Completed":
+      return "border-edge text-muted-foreground";
     case "Planned":
-      return "border-amber-500/20 bg-amber-500/10 text-amber-400";
+      return "border-dashed border-faint/50 text-faint";
   }
 }

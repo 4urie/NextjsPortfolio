@@ -31,9 +31,9 @@ export function GitHubContributionGraph({
     <ContributionGraph
       className="mx-auto py-2"
       data={data}
-      blockSize={11}
+      blockSize={10}
       blockMargin={3}
-      blockRadius={0}
+      blockRadius={2}
     >
       <ContributionGraphCalendar
         className="no-scrollbar px-2"
@@ -64,17 +64,17 @@ export function GitHubContributionGraph({
       <ContributionGraphFooter className="px-2">
         <ContributionGraphTotalCount>
           {({ totalCount, year }) => (
-            <div className="text-muted-foreground">
+            <div className="micro-label">
               {totalCount.toLocaleString("en")} contributions in {year + 1} on{" "}
               <a
-                className="font-medium underline underline-offset-4"
+                className="underline decoration-foreground/25 underline-offset-[2px] hover:decoration-foreground"
                 href={`https://github.com/${GITHUB_USERNAME}`}
                 target="_blank"
                 rel="noopener"
               >
                 GitHub
               </a>
-              <span className="text-muted-foreground/70">
+              <span className="text-faint/70">
                 {" "}
                 and 1,000+ on private client repos
               </span>

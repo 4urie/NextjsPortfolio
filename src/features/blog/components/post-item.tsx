@@ -35,7 +35,7 @@ export function PostItem({
             unoptimized
           />
 
-          <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-black/10 ring-inset dark:ring-white/10" />
+          <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-edge ring-inset" />
 
           {/* {post.metadata.new && (
             <span className="absolute top-1.5 right-1.5 rounded-md bg-info px-1.5 font-mono text-sm font-medium text-white text-shadow-xs">
@@ -44,8 +44,8 @@ export function PostItem({
           )} */}
 
           {post.metadata.pinned && (
-            <span className="absolute top-1.5 right-1.5 flex size-6 items-center justify-center rounded-md bg-info">
-              <PinIcon className="size-4 rotate-45 text-white" />
+            <span className="absolute top-1.5 right-1.5 flex size-6 items-center justify-center rounded-md bg-foreground">
+              <PinIcon className="size-4 rotate-45 text-background" />
               <span className="sr-only">Pinned</span>
             </span>
           )}
@@ -53,10 +53,10 @@ export function PostItem({
       )}
 
       <div className="flex flex-col gap-1 p-2">
-        <h3 className="text-lg leading-snug font-medium text-balance underline-offset-4 group-hover/post:underline">
+        <h3 className="text-[15px] leading-snug font-medium text-balance underline-offset-4 group-hover/post:underline">
           {post.metadata.title}
           {post.metadata.new && (
-            <span className="ml-2 inline-block size-2 -translate-y-px rounded-full bg-info">
+            <span className="ml-2 inline-block size-2 -translate-y-px rounded-full bg-foreground">
               <span className="sr-only">New</span>
             </span>
           )}
@@ -64,7 +64,7 @@ export function PostItem({
 
         <dl>
           <dt className="sr-only">Published on</dt>
-          <dd className="text-sm text-muted-foreground">
+          <dd className="micro-label">
             <time dateTime={dayjs(post.metadata.createdAt).toISOString()}>
               {dayjs(post.metadata.createdAt).format("DD.MM.YYYY")}
             </time>

@@ -30,16 +30,16 @@ export function ScrollTop({
       data-scroll-direction={scrollDirection}
       className={cn(
         "[--bottom:1rem] lg:[--bottom:2rem]",
-        "fixed right-4 bottom-[calc(var(--bottom,1rem)+env(safe-area-inset-bottom,0px))] z-50 lg:right-8",
-        "transition-[background-color,opacity] duration-300 data-[scroll-direction=down]:opacity-30 data-[scroll-direction=up]:opacity-100 data-[visible=false]:opacity-0",
+        "fixed right-4 bottom-[calc(var(--bottom,1rem)+env(safe-area-inset-bottom,0px))] z-50 rounded-xl border border-edge bg-background/90 backdrop-blur lg:right-8",
+        "transition-[opacity] duration-300 data-[scroll-direction=down]:opacity-30 data-[scroll-direction=up]:opacity-100 data-[visible=false]:opacity-0",
         className
       )}
-      variant="secondary"
+      variant="ghost"
       size="icon-lg"
       onClick={() => window.scrollTo({ top: 0 })}
       {...props}
     >
-      <ArrowUpIcon className="size-5" />
+      <ArrowUpIcon className="size-4" />
       <span className="sr-only">Scroll to top</span>
     </Button>
   );

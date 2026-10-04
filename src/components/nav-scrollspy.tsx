@@ -9,16 +9,23 @@ import type { NavItem } from "@/types/nav";
 export function NavScrollspy({
   items,
   className,
+  orientation = "horizontal",
 }: {
   items: NavItem[];
   className?: string;
+  orientation?: "horizontal" | "vertical";
 }) {
-  const shouldObserve = useMediaQuery("(min-width: 48rem)"); // 768px
+  const shouldObserve = useMediaQuery("(min-width: 64rem)"); // 1024px — sidebar breakpoint
   const itemIds = items.map((link) => link.href?.split("#")[1]).filter(Boolean);
   const activeItemId = useActiveItem(itemIds, shouldObserve);
 
   return (
-    <Nav className={className} items={items} activeId={`#${activeItemId}`} />
+    <Nav
+      orientation={orientation}
+      className={className}
+      items={items}
+      activeId={`#${activeItemId}`}
+    />
   );
 }
 

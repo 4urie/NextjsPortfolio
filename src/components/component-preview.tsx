@@ -68,7 +68,7 @@ export function ComponentPreview({
         <TabsContent value="preview">
           <div
             data-slot="preview"
-            className="rounded-lg border border-edge bg-zinc-950/0.75 bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[10px_10px] bg-center p-4 [--pattern-foreground:var(--color-zinc-950)]/5 dark:bg-white/0.75 dark:[--pattern-foreground:var(--color-white)]/5"
+            className="rounded-lg border border-edge bg-muted bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[10px_10px] bg-center p-4 [--pattern-foreground:var(--color-foreground)]/5"
           >
             {(canReplay || openInV0Url) && (
               <div data-slot="buttons" className="mb-4 flex justify-end gap-2">

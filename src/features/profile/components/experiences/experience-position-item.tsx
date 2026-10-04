@@ -45,7 +45,7 @@ export function ExperiencePositionItem({
               <ExperienceIcon className="size-4" icon={position.icon} />
             </div>
 
-            <h4 className="flex-1 font-medium text-balance">
+            <h4 className="flex-1 text-[15px] font-medium text-balance">
               {position.title}
             </h4>
 
@@ -57,7 +57,7 @@ export function ExperiencePositionItem({
             </div>
           </div>
 
-          <div className="flex items-center gap-2 pl-9 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 pl-9 micro-label">
             {position.employmentType && (
               <>
                 <dl>
@@ -76,7 +76,7 @@ export function ExperiencePositionItem({
               <dt className="sr-only">Employment Period</dt>
               <dd className="flex items-center gap-0.5">
                 <span>{start}</span>
-                <span className="font-mono">—</span>
+                <span>—</span>
                 {isOngoing ? (
                   <>
                     <InfinityIcon

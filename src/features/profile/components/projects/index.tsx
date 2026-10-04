@@ -40,7 +40,7 @@ export function Projects() {
       <PanelHeader className="flex flex-wrap items-center justify-between gap-3 py-4">
         <PanelTitle>
           Projects
-          <sup className="ml-1 font-mono text-sm text-muted-foreground select-none">
+          <sup className="ml-1 font-mono text-[11px] tracking-[0.08em] text-faint uppercase select-none">
             ({PROJECTS.length})
           </sup>
         </PanelTitle>
@@ -48,7 +48,7 @@ export function Projects() {
         <ProjectViewToggle value={view} onChange={setView} />
       </PanelHeader>
 
-      <div className="px-4 py-5">
+      <div className="p-5">
         <AnimatePresence mode="wait" initial={false}>
           {view === "grid" ? (
             <motion.div
@@ -56,8 +56,8 @@ export function Projects() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -14 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
-              className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3"
             >
               {PROJECTS.map((project) => (
                 <ProjectCard key={project.id} project={project} />
@@ -69,7 +69,7 @@ export function Projects() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -14 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-0"
             >
               {PROJECTS.map((project) => (

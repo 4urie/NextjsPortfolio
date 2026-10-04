@@ -3,12 +3,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
+import { Tag } from "@/components/ui/tag";
 
 export const metadata: Metadata = {
-  title: "Projects - Aurie Nellas",
-  description:
-    "Explore my products and projects built with modern technologies.",
+  title: "Products",
+  description: "Practical builds across web, mobile, and IoT.",
 };
 
 const products = [
@@ -26,84 +25,69 @@ const products = [
 
 export default function ProductsPage() {
   return (
-    <div className="py-20">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-5xl">
-            My Projects
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Practical builds across web, mobile, and IoT
-          </p>
-        </div>
+    <div className="mx-auto md:max-w-3xl">
+      <div className="screen-line-after px-4 pt-10 pb-6">
+        <h1 className="font-pixel text-5xl lowercase">products</h1>
+      </div>
 
-        <div className="grid gap-8">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="group relative overflow-hidden rounded-xl border bg-background transition-all hover:border-primary/50 hover:shadow-lg"
-            >
-              <div className="grid gap-6 p-8 md:grid-cols-3">
-                <div className="flex items-center justify-center overflow-hidden rounded-lg bg-muted md:col-span-1">
-                  {product.image ? (
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      width={400}
-                      height={300}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="p-8">
-                      <Package className="h-20 w-20 text-primary" />
-                    </div>
-                  )}
-                </div>
+      <div className="screen-line-after p-4">
+        <p className="micro-label text-balance">{metadata.description}</p>
+      </div>
 
-                <div className="md:col-span-2">
-                  <div className="mb-4 flex items-center gap-3">
-                    <h2 className="text-2xl font-bold">{product.name}</h2>
-                    <span className="rounded-full bg-green-500/10 px-3 py-1 text-xs font-medium text-green-600 dark:text-green-400">
-                      {product.status}
-                    </span>
-                  </div>
-
-                  <p className="mb-4 text-muted-foreground">
-                    {product.description}
-                  </p>
-
-                  <div className="mb-6 flex flex-wrap gap-2">
-                    {product.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-md border bg-muted px-2 py-1 text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Button asChild>
-                    <Link href={product.href}>
-                      View Product
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
+      <div className="grid gap-3 p-4">
+        {products.map((product) => (
+          <Link
+            key={product.id}
+            href={product.href}
+            className="group flex flex-col gap-4 rounded-2xl border border-edge bg-background/90 p-5 shadow-card backdrop-blur-sm transition-shadow duration-350 hover:shadow-card-hover sm:flex-row"
+          >
+            <div className="flex aspect-4/3 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-edge bg-muted sm:w-44">
+              {product.image ? (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  width={400}
+                  height={300}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <Package className="h-10 w-10 text-faint" />
+              )}
             </div>
-          ))}
-        </div>
 
-        <div className="mt-16 rounded-xl border bg-muted/30 p-8 text-center">
-          <h3 className="mb-2 text-xl font-semibold">
-            More Projects Coming Soon
-          </h3>
-          <p className="text-muted-foreground">
-            I’m continuously building new solutions for school, personal, and
-            capstone work.
-          </p>
-        </div>
+            <div className="flex flex-1 flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <h2 className="text-[15px] font-medium">{product.name}</h2>
+                <Tag featured>{product.status}</Tag>
+              </div>
+
+              <p className="text-sm text-muted-foreground">
+                {product.description}
+              </p>
+
+              <ul className="mt-auto flex flex-wrap gap-1.5">
+                {product.tech.map((tech) => (
+                  <li key={tech}>
+                    <Tag>{tech}</Tag>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <ArrowRight
+              className="size-4 shrink-0 self-center text-faint transition-transform duration-200 group-hover:translate-x-0.5"
+              aria-hidden
+            />
+          </Link>
+        ))}
+      </div>
+
+      <div className="screen-line-before border-x border-edge p-8 text-center">
+        <p className="mb-2 micro-label">more coming soon</p>
+        <p className="text-sm text-muted-foreground">
+          I&apos;m continuously building new solutions for school, personal, and
+          capstone work.
+        </p>
       </div>
     </div>
   );

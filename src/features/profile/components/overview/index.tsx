@@ -17,69 +17,94 @@ import { PhoneItem } from "./phone-item";
 
 export function Overview() {
   return (
-    <Panel>
+    <Panel id="overview">
       <h2 className="sr-only">Overview</h2>
 
-      <PanelContent className="space-y-2.5">
-        <JobItem
-          title={USER.jobs[0].title}
-          company={USER.jobs[0].company}
-          website={USER.jobs[0].website}
-        />
+      <PanelContent className="p-0">
+        <div className="grid border-t border-edge sm:grid-cols-2">
+          <Cell>
+            <JobItem
+              title={USER.jobs[0].title}
+              company={USER.jobs[0].company}
+              website={USER.jobs[0].website}
+            />
+          </Cell>
+          <Cell>
+            <JobItem
+              title={USER.jobs[1].title}
+              company={USER.jobs[1].company}
+              website={USER.jobs[1].website}
+            />
+          </Cell>
 
-        <div className="grid gap-x-12 gap-y-2.5 sm:grid-cols-2">
-          <JobItem
-            title={USER.jobs[1].title}
-            company={USER.jobs[1].company}
-            website={USER.jobs[1].website}
-          />
+          <Cell>
+            <IntroItem>
+              <IntroItemIcon>
+                {USER.gender === "male" ? <MarsIcon /> : <VenusIcon />}
+              </IntroItemIcon>
+              <IntroItemContent aria-label={`Pronouns: ${USER.pronouns}`}>
+                {USER.pronouns}
+              </IntroItemContent>
+            </IntroItem>
+          </Cell>
 
-          <IntroItem>
-            <IntroItemIcon>
-              {USER.gender === "male" ? <MarsIcon /> : <VenusIcon />}
-            </IntroItemIcon>
-            <IntroItemContent aria-label={`Pronouns: ${USER.pronouns}`}>
-              {USER.pronouns}
-            </IntroItemContent>
-          </IntroItem>
+          <Cell>
+            <IntroItem>
+              <IntroItemIcon>
+                <MapPinIcon />
+              </IntroItemIcon>
+              <IntroItemContent>
+                <IntroItemLink
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(USER.address)}`}
+                  aria-label={`Location: ${USER.address}`}
+                >
+                  {USER.address}
+                </IntroItemLink>
+              </IntroItemContent>
+            </IntroItem>
+          </Cell>
 
-          <IntroItem>
-            <IntroItemIcon>
-              <MapPinIcon />
-            </IntroItemIcon>
-            <IntroItemContent>
-              <IntroItemLink
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(USER.address)}`}
-                aria-label={`Location: ${USER.address}`}
-              >
-                {USER.address}
-              </IntroItemLink>
-            </IntroItemContent>
-          </IntroItem>
+          <Cell>
+            <CurrentLocalTimeItem timeZone={USER.timeZone} />
+          </Cell>
 
-          <CurrentLocalTimeItem timeZone={USER.timeZone} />
+          <Cell>
+            <PhoneItem phoneNumber={USER.phoneNumber} />
+          </Cell>
 
-          <PhoneItem phoneNumber={USER.phoneNumber} />
+          <Cell>
+            <PhoneItem phoneNumber={USER.secondPhoneNumber} />
+          </Cell>
 
-          <PhoneItem phoneNumber={USER.secondPhoneNumber} />
+          <Cell>
+            <EmailItem email={USER.email} />
+          </Cell>
 
-          <EmailItem email={USER.email} />
-
-          <IntroItem>
-            <IntroItemIcon>
-              <GlobeIcon />
-            </IntroItemIcon>
-            <IntroItemContent>
-              <IntroItemLink
-                href={USER.website}
-                aria-label={`Personal website: ${urlToName(USER.website)}`}
-              >
-                {urlToName(USER.website)}
-              </IntroItemLink>
-            </IntroItemContent>
-          </IntroItem>
+          <Cell>
+            <IntroItem>
+              <IntroItemIcon>
+                <GlobeIcon />
+              </IntroItemIcon>
+              <IntroItemContent>
+                <IntroItemLink
+                  href={USER.website}
+                  aria-label={`Personal website: ${urlToName(USER.website)}`}
+                >
+                  {urlToName(USER.website)}
+                </IntroItemLink>
+              </IntroItemContent>
+            </IntroItem>
+          </Cell>
         </div>
       </PanelContent>
     </Panel>
+  );
+}
+
+function Cell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="border-b border-edge p-4 sm:odd:border-r sm:odd:pr-4 sm:even:pl-4">
+      {children}
+    </div>
   );
 }

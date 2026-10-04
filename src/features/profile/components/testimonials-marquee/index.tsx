@@ -10,6 +10,18 @@ import { Panel } from "../panel";
 import { TestimonialItem } from "./testimonial-item";
 
 export function TestimonialsMarquee() {
+  const firstRow = TESTIMONIALS_1.slice().sort((a, b) =>
+    a.authorName.localeCompare(b.authorName)
+  );
+  const secondRow = TESTIMONIALS_2.slice().sort((a, b) =>
+    a.authorName.localeCompare(b.authorName)
+  );
+
+  // Hidden until testimonial data is added — the marquee is dead UI when empty.
+  if (firstRow.length === 0 && secondRow.length === 0) {
+    return null;
+  }
+
   return (
     <Panel
       id="testimonials"
@@ -22,16 +34,14 @@ export function TestimonialsMarquee() {
         <MarqueeFade side="right" />
 
         <MarqueeContent>
-          {TESTIMONIALS_1.slice()
-            .sort((a, b) => a.authorName.localeCompare(b.authorName))
-            .map((item) => (
-              <MarqueeItem
-                key={item.authorName}
-                className="mx-0 h-full w-xs border-r border-edge"
-              >
-                <TestimonialItem {...item} />
-              </MarqueeItem>
-            ))}
+          {firstRow.map((item) => (
+            <MarqueeItem
+              key={item.authorName}
+              className="mx-0 h-full w-xs border-r border-edge"
+            >
+              <TestimonialItem {...item} />
+            </MarqueeItem>
+          ))}
         </MarqueeContent>
       </Marquee>
 
@@ -42,16 +52,14 @@ export function TestimonialsMarquee() {
         <MarqueeFade side="right" />
 
         <MarqueeContent direction="right">
-          {TESTIMONIALS_2.slice()
-            .sort((a, b) => a.authorName.localeCompare(b.authorName))
-            .map((item) => (
-              <MarqueeItem
-                key={item.authorName}
-                className="mx-0 h-full w-xs border-r border-edge"
-              >
-                <TestimonialItem {...item} />
-              </MarqueeItem>
-            ))}
+          {secondRow.map((item) => (
+            <MarqueeItem
+              key={item.authorName}
+              className="mx-0 h-full w-xs border-r border-edge"
+            >
+              <TestimonialItem {...item} />
+            </MarqueeItem>
+          ))}
         </MarqueeContent>
       </Marquee>
     </Panel>

@@ -38,8 +38,8 @@ export function CertificationItem({
       ) : (
         <div
           className={cn(
-            "mx-4 flex size-6 shrink-0 items-center justify-center rounded-lg select-none",
-            "border border-muted-foreground/15 ring-1 ring-edge ring-offset-1 ring-offset-background",
+            "mx-4 flex size-6 shrink-0 items-center justify-center rounded-md select-none",
+            "border border-edge",
             "bg-muted text-muted-foreground [&_svg]:size-4"
           )}
           aria-hidden
@@ -49,11 +49,11 @@ export function CertificationItem({
       )}
 
       <div className="flex-1 space-y-1 border-l border-dashed border-edge p-4 pr-2">
-        <h3 className="leading-snug font-medium text-balance underline-offset-4 group-hover/cert:underline">
+        <h3 className="text-[15px] leading-snug font-medium text-balance underline-offset-4 group-hover/cert:underline">
           {certification.title}
         </h3>
 
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 micro-label">
           <dl>
             <dt className="sr-only">Issued by</dt>
             <dd>

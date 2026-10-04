@@ -63,31 +63,34 @@ const features = [
 export function ShopFlowFeatures() {
   return (
     <section id="features" className="py-20 md:py-32">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+      <div className="mx-auto max-w-3xl">
+        <div className="mb-12">
+          <h2 className="text-[1.3rem] font-semibold tracking-[-0.02em]">
             Everything You Need for Smart Water Ordering
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="mt-2 text-sm text-muted-foreground">
             Built with modern technologies to provide a seamless customer and
             admin experience
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+        <div className="grid gap-3 md:grid-cols-2">
           {features.map((feature) => {
             const Icon = feature.icon;
             return (
               <div
                 key={feature.title}
-                className="group relative overflow-hidden rounded-xl border bg-background p-8 transition-all hover:border-primary/50 hover:shadow-lg"
+                className="group rounded-2xl border border-edge bg-background/90 p-6 shadow-card backdrop-blur-sm transition-shadow duration-350 hover:shadow-card-hover"
               >
-                <div className="mb-4 inline-flex rounded-lg bg-primary/10 p-3">
-                  <Icon className="h-6 w-6 text-primary" />
+                <div className="mb-4 inline-flex rounded-md border border-edge bg-muted p-3">
+                  <Icon className="h-5 w-5 text-faint" />
                 </div>
-                <h3 className="mb-3 text-xl font-semibold">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-                <div className="absolute top-0 right-0 -mt-8 -mr-8 h-24 w-24 rounded-full bg-primary/5 transition-transform group-hover:scale-150" />
+                <h3 className="mb-2 text-[15px] font-medium">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {feature.description}
+                </p>
               </div>
             );
           })}

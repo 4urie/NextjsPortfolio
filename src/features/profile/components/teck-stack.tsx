@@ -14,42 +14,39 @@ export function TeckStack() {
         <PanelTitle>Stack</PanelTitle>
       </PanelHeader>
 
-      <PanelContent
-        className={cn(
-          "[--pattern-foreground:var(--color-zinc-950)]/5 dark:[--pattern-foreground:var(--color-white)]/5",
-          "bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[10px_10px] bg-center",
-          "bg-zinc-950/0.75 dark:bg-white/0.75"
-        )}
-      >
-        <ul className="flex flex-wrap gap-4 select-none">
-          {TECH_STACK.map((tech) => {
-            return (
-              <li key={tech.key} className="flex">
-                <SimpleTooltip content={tech.title}>
-                  <a
-                    href={tech.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={tech.title}
-                    className="transition-transform hover:scale-110"
-                  >
-                    <Image
-                      src={tech.iconUrl}
-                      alt={`${tech.title} icon`}
-                      width={32}
-                      height={32}
-                      unoptimized
-                      className={cn(
-                        "h-8 w-8 object-contain",
-                        tech.theme && "dark:invert"
-                      )}
-                    />
-                    <span className="sr-only">{tech.title}</span>
-                  </a>
-                </SimpleTooltip>
-              </li>
-            );
-          })}
+      <PanelContent className="p-0">
+        {/* Hairline-divided cell grid: the dividers are the design.
+            Icons stay in permanent grayscale (strict monochrome). */}
+        <ul className="grid grid-cols-4 border-t border-l border-edge sm:grid-cols-6 md:grid-cols-8">
+          {TECH_STACK.map((tech) => (
+            <li
+              key={tech.key}
+              className="border-r border-b border-edge [&:nth-child(4n)]:border-r-0 sm:[&:nth-child(6n)]:border-r-0 md:[&:nth-child(8n)]:border-r-0"
+            >
+              <SimpleTooltip content={tech.title}>
+                <a
+                  href={tech.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={tech.title}
+                  className="flex aspect-square items-center justify-center transition-colors duration-200 hover:bg-accent"
+                >
+                  <Image
+                    src={tech.iconUrl}
+                    alt={`${tech.title} icon`}
+                    width={32}
+                    height={32}
+                    unoptimized
+                    className={cn(
+                      "h-7 w-7 object-contain opacity-70 grayscale transition-opacity duration-200 hover:opacity-100",
+                      tech.theme && "dark:invert"
+                    )}
+                  />
+                  <span className="sr-only">{tech.title}</span>
+                </a>
+              </SimpleTooltip>
+            </li>
+          ))}
         </ul>
       </PanelContent>
     </Panel>

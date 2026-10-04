@@ -6,7 +6,7 @@ export function IntroItem({
 }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn("flex items-center gap-4 font-mono text-sm", className)}
+      className={cn("flex items-center gap-3 font-sans text-[15px]", className)}
       {...props}
     />
   );
@@ -19,8 +19,8 @@ export function IntroItemIcon({
   return (
     <div
       className={cn(
-        "flex size-6 shrink-0 items-center justify-center rounded-lg border border-muted-foreground/15 bg-muted ring-1 ring-edge ring-offset-1 ring-offset-background",
-        "[&_svg]:pointer-events-none [&_svg]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4",
+        "flex size-6 shrink-0 items-center justify-center rounded-md border border-edge bg-muted text-faint",
+        "[&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       aria-hidden="true"
@@ -42,7 +42,10 @@ export function IntroItemLink({
 }: React.ComponentProps<"a">) {
   return (
     <a
-      className={cn("underline-offset-4 hover:underline", className)}
+      className={cn(
+        "underline decoration-foreground/25 underline-offset-[2px] hover:decoration-foreground",
+        className
+      )}
       target="_blank"
       rel="noopener noreferrer"
       {...props}

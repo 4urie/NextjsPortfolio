@@ -24,19 +24,22 @@ export function InlineTOC({
 
   return (
     <CollapsibleWithContext
-      className={cn("not-prose rounded-lg bg-code font-sans", className)}
+      className={cn(
+        "not-prose rounded-xl border border-edge bg-muted/50 font-sans",
+        className
+      )}
       {...props}
     >
-      <CollapsibleTrigger className="group/toc inline-flex w-full items-center gap-2 py-2.5 pr-2 pl-4 text-sm font-medium [&_svg]:size-4">
+      <CollapsibleTrigger className="group/toc inline-flex w-full items-center gap-2 py-2.5 pr-2 pl-4 font-mono text-[11px] tracking-[0.08em] text-faint uppercase [&_svg]:size-4">
         <TextIcon className="-translate-x-0.5" />
         {children ?? "On this page"}
-        <div className="ml-auto shrink-0 text-muted-foreground" aria-hidden>
+        <div className="ml-auto shrink-0" aria-hidden>
           <CollapsibleChevronsIcon />
         </div>
       </CollapsibleTrigger>
 
       <CollapsibleContent className="overflow-hidden duration-300 data-[state=closed]:animate-collapsible-fade-up data-[state=open]:animate-collapsible-fade-down">
-        <ul className="flex flex-col px-4 pb-2 text-sm text-muted-foreground">
+        <ul className="flex flex-col px-4 pb-2 text-[13px] text-muted-foreground">
           {items.map((item) => (
             <li
               key={item.url}
@@ -46,7 +49,7 @@ export function InlineTOC({
               }}
             >
               <a
-                className="underline-offset-4 transition-colors hover:text-accent-foreground hover:underline"
+                className="underline-offset-[2px] transition-colors hover:text-foreground hover:underline"
                 href={item.url}
               >
                 {item.title}
